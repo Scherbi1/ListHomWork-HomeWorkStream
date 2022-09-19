@@ -4,19 +4,19 @@ import org.springframework.stereotype.Service;
 import pro.sry.ListHomWork.exceptions.EmployeeNotFoundException;
 import pro.sry.ListHomWork.exceptions.EmployeeAlreadyAddedException;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class  EmployeeServiceImpl implements EmployeeService {
     private final List<Employee> employeeList;
 
-    public EmployeeServiceImpl(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+
+    public EmployeeServiceImpl() {
+        employeeList = new ArrayList<>();
+        //this.employeeList = employeeList;
     }
+
 
 
 
@@ -60,33 +60,5 @@ public class  EmployeeServiceImpl implements EmployeeService {
         return employeeList;
     }
 
-    public  List<Employee> findAllDepartment(int departmentNumber) {
-        List<Employee> department = employeeList.stream()
-                .filter((d)->d.getDepartmentNumber()==departmentNumber)
-                .collect(Collectors.toList());
-        return department;
-    }
 
-    public List<Employee> FindDepartmentMax(int departmentNumber) {
-        employeeList.stream().
-                filter(employee -> employee.getDepartmentNumber()!=departmentNumber)
-                .findFirst()
-                .orElseThrow(RuntimeException::new);
-        List<Employee> e= employeeList.stream()
-                .filter((d)->d.getDepartmentNumber()==departmentNumber)
-                .max(Comparator.comparing(employee->employee.getSalaryStaff()))
-                .stream().collect(Collectors.toList());
-        return e;
-    }
-    public List<Employee> FindDepartmentMin(int departmentNumber) {
-       employeeList.stream().
-               filter(employee -> employee.getDepartmentNumber()!=departmentNumber)
-               .findFirst()
-               .orElseThrow(RuntimeException::new);
-        List<Employee> e= employeeList.stream()
-                .filter((d)->d.getDepartmentNumber()==departmentNumber)
-                .min(Comparator.comparing(employee->employee.getSalaryStaff()))
-                .stream().collect(Collectors.toList());
-        return e;
-    }
 }

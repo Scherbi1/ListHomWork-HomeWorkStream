@@ -11,9 +11,5 @@ public interface EmployeeService {
 
    List<Employee> findAll();
 
-    List<Employee> findAllDepartment(int departmentNumber);
 
-    List<Employee> FindDepartmentMax(int departmentNumber);
-
-    List<Employee> FindDepartmentMin(int departmentNumber);
 }
