@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pro.sry.ListHomWork.servise.DepartmentService;
 import pro.sry.ListHomWork.servise.Employee;
 import pro.sry.ListHomWork.servise.EmployeeService;
 
@@ -12,10 +13,14 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService service;
+    private final DepartmentService serviceDepartment;
 
-    public EmployeeController(EmployeeService service) {
+    public EmployeeController(EmployeeService service, DepartmentService serviceDepartment) {
         this.service = service;
+        this.serviceDepartment=serviceDepartment;
     }
+
+
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String name, @RequestParam String surName,@RequestParam double salaryStaff,@RequestParam int departmentNumber) {
@@ -36,14 +41,14 @@ public class EmployeeController {
     }
     @GetMapping("/findAll/department")
     public List<Employee>findAllDepartment(@RequestParam  int departmentNumber){
-        return service.findAllDepartment(departmentNumber);
+        return serviceDepartment.findAllDepartment(departmentNumber);
     }
     @GetMapping("/findAll/department/Max-salary")
     public List<Employee>FindDepartmentMax(@RequestParam int departmentNumber) {
-        return service.FindDepartmentMax(departmentNumber);
+        return serviceDepartment.FindDepartmentMax(departmentNumber);
     }
     @GetMapping("/findAll/department/Min-salary")
     public List<Employee>FindDepartmentMin(@RequestParam int departmentNumber) {
-        return service.FindDepartmentMin(departmentNumber);
+        return serviceDepartment.FindDepartmentMin(departmentNumber);
     }
 }
